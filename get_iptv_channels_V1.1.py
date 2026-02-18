@@ -362,7 +362,7 @@ def process_channel_data(channels: List[Tuple[str, ...]]) -> Dict[str, List[str]
                 if condition(channel[1]):
                     name = "CCTV-14高清" if channel[1] == "CCTV-少儿高清" else channel[1]
                     RTP2HTTPD = config.get('RTP2HTTPD', 'http://192.168.5.1:8888')
-                    url = f'{RTP2HTTPD}/rtp/{channel[3]}'
+                    url = f'rtp://{channel[3]}'
                     append = False
                     if channel[7] == '2':  # 使用FCC
                         url = f'{url}?fcc={channel[8]}:{channel[9]}'
@@ -374,7 +374,7 @@ def process_channel_data(channels: List[Tuple[str, ...]]) -> Dict[str, List[str]
                             url = f'{url}?fec={channel[10]}'
                     # 写入txt文件
                     rtspUrl = channel[6].replace(
-                        "rtsp://", f'{RTP2HTTPD}/rtsp/')+'?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}' if channel[4] == '1' else None
+                        "rtsp://", f'rtsp://')+'?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}' if channel[4] == '1' else None
                     if rtspUrl is not None:  # 支持时移的源
                         ftxt.write(f'{name},{rtspUrl}#{url}\n')
                     else:
@@ -585,5 +585,6 @@ if __name__ == '__main__':
         
     channel_info = get_channel_list(host, cookies, user_token, stbid)
     get_epg(host, cookies, channel_info)
+
 
 
