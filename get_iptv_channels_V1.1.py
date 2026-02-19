@@ -387,15 +387,15 @@ def process_channel_data(channels: List[Tuple[str, ...]]) -> Dict[str, List[str]
                     channel_ids.append([channel[0], name, channel[2]])
         
         # 处理不同分类的频道
-        write_channel('央视频道', lambda name: any(x in name for x in ['CCTV', 'CETV'. 'CHC', 'CGTN']))
+        write_channel('央视频道', lambda name: any(x in name for x in ['CCTV', 'CETV', 'CHC', 'CGTN']))
         ftxt.write('4K频道,#genre#\n')
         write_channel('4K频道', lambda name: '4K' in name)
         ftxt.write('卫视频道,#genre#\n')
         write_channel('卫视频道', lambda name: '卫视' in name)
         ftxt.write('地方频道,#genre#\n')
-        write_channel('地方频道', lambda name: any(x in name for x in ['SCTV', '四川'. 'CDTV', '成都'. '熊猫'. '峨眉']))
+        write_channel('地方频道', lambda name: any(x in name for x in ['SCTV', '四川', 'CDTV', '成都', '熊猫', '峨眉']))
         ftxt.write('其他频道,#genre#\n')
-        write_channel('其他频道', lambda name: not any(x in name for x in ['SCTV', '四川'. 'CDTV', '成都'. '熊猫'. '峨眉', '卫视', '4K', 'CCTV', 'CHC', 'CGTN']))
+        write_channel('其他频道', lambda name: not any(x in name for x in ['SCTV', '四川', 'CDTV', '成都', '熊猫', '峨眉', '卫视', '4K', 'CCTV', 'CETV', 'CHC', 'CGTN']))
     
     # 生成频道信息映射
     for i, channel in enumerate(channels):
@@ -587,6 +587,7 @@ if __name__ == '__main__':
         
     channel_info = get_channel_list(host, cookies, user_token, stbid)
     get_epg(host, cookies, channel_info)
+
 
 
 
