@@ -342,7 +342,7 @@ def process_channel_data(channels: List[Tuple[str, ...]]) -> Dict[str, List[str]
         
         # 写入文件头
         ftxt.write('央视频道,#genre#\n')
-        fm3u.write('#EXTM3U url-tvg="http://192.168.3.8:5678/index.php\n')
+        fm3u.write('#EXTM3U url-tvg="http://192.168.3.8:5000/output/epg.xml\n')
         
         # 定义频道分类处理函数
         # r'ChannelID\=\"(\d+)\",'
@@ -587,6 +587,7 @@ if __name__ == '__main__':
         
     channel_info = get_channel_list(host, cookies, user_token, stbid)
     get_epg(host, cookies, channel_info)
+
 
 
 
