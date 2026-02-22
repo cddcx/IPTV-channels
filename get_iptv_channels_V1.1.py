@@ -373,7 +373,7 @@ def process_channel_data(channels: List[Tuple[str, ...]]) -> Dict[str, List[str]
                         else:
                             url = f'{url}?fec={channel[10]}'
                     # 写入txt文件
-                    rtspUrl = channel[6].replace(
+                    rtspUrl = channel[5].replace(
                         "(.+?\.smil)?", f'(.+?\.smil)?')+'?playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}' if channel[4] == '1' else None
                     if rtspUrl is not None:  # 支持时移的源
                         ftxt.write(f'{name},{rtspUrl}#{url}\n')
@@ -587,6 +587,7 @@ if __name__ == '__main__':
         
     channel_info = get_channel_list(host, cookies, user_token, stbid)
     get_epg(host, cookies, channel_info)
+
 
 
 
