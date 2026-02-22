@@ -342,7 +342,7 @@ def process_channel_data(channels: List[Tuple[str, ...]]) -> Dict[str, List[str]
         
         # 写入文件头
         ftxt.write('央视频道,#genre#\n')
-        fm3u.write('#EXTM3U url-tvg="http://192.168.3.8:5000/output/epg.xml\n')
+        fm3u.write('#EXTM3U url-tvg="http://192.168.3.8:5000/output/epg.xml"\n')
         
         # 定义频道分类处理函数
         # r'ChannelID\=\"(\d+)\",'
@@ -393,7 +393,7 @@ def process_channel_data(channels: List[Tuple[str, ...]]) -> Dict[str, List[str]
         ftxt.write('卫视频道,#genre#\n')
         write_channel('卫视频道', lambda name: '卫视' in name)
         ftxt.write('地方频道,#genre#\n')
-        write_channel('地方频道', lambda name: any(x in name for x in ['SCTV', '四川', 'CDTV', '成都', '熊猫', '峨眉']))
+        write_channel('四川频道', lambda name: any(x in name for x in ['SCTV', '四川', 'CDTV', '成都', '熊猫', '峨眉']))
         ftxt.write('其他频道,#genre#\n')
         write_channel('其他频道', lambda name: not any(x in name for x in ['SCTV', '四川', 'CDTV', '成都', '熊猫', '峨眉', '卫视', '4K', 'CCTV', 'CETV', 'CHC', 'CGTN']))
     
@@ -587,6 +587,7 @@ if __name__ == '__main__':
         
     channel_info = get_channel_list(host, cookies, user_token, stbid)
     get_epg(host, cookies, channel_info)
+
 
 
 
